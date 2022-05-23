@@ -1,0 +1,7 @@
+{
+  "name": "Chat Application",
+  "description": "Server Side for Chat Application",
+  "repository": "https://github.com/vamsi937/mern-chat-backend",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs"
+}
