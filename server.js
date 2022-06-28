@@ -1,8 +1,8 @@
 const express=require("express");
 const dotenv=require("dotenv");
 const colors=require("colors");
+const cors=require("cors");
 const path=require("path");
-
 const connectDB = require("./config/db");
 const userRoutes=require("./routes/userRoutes");
 const chatRoutes=require("./routes/chatRoutes");
@@ -11,6 +11,7 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware");
 
 const app=express();
 
+app.use(cors());
 app.use(express.json()); //to accept JSON data  
 
 dotenv.config();
@@ -51,12 +52,12 @@ app.use(errorHandler);
 
 const server=app.listen(PORT, console.log(`Server running on PORT: ${PORT}`.yellow.bold));
 
-const io=require('socket.io')(server,{
-    pingTimeout: 60000, //ms
-    cors:{
-        origin:"http://localhost:3000"
-    }
-})
+const io = require("socket.io")(server, {
+  pingTimeout: 60000, //ms
+  cors: {
+    origin: ["http://localhost:3000", "https://talk-mern-chat.netlify.app"],
+  },
+});
 
 io.on("connection",(socket)=>{
     console.log("Connected to socket.io");
